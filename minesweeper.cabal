@@ -1,0 +1,22 @@
+name:                minesweeper
+version:             0.1.0.0
+synopsis:            A Minesweeper clone written in Haskell and Gloss
+license:             PublicDomain
+author:              Brooks J Rady
+maintainer:          b.j.rady@gmail.com
+category:            Game
+build-type:          Simple
+cabal-version:       >=1.10
+
+
+executable minesweeper
+  main-is:             Main.hs
+  other-modules:       Model,
+                       Render,
+                       Update,
+                       Util
+  build-depends:       base >=4.9 && <4.10,
+                       gloss
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  ghc-options:         -O2 -threaded
