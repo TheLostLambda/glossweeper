@@ -13,7 +13,7 @@ data Tile = Tile { revealed :: Bool
 
 type Grid = [[Tile]]
 
-type Size = (Int,Int)
+type Size = (Int, Int)
 
 initGame :: Size -> Minesweeper
 initGame (r,c) = Game (replicate r $ replicate c $ Tile False False False) 0
