@@ -23,6 +23,15 @@ placeMines n ms@(Game grid _ rng _) = ms { grid = newGrid, rng = fst $ split rng
         mines = take n $ nub $ zip (randomRs (0, gr - 1) rGen) (randomRs (0, gc - 1) cGen)
         newGrid = foldr (\index grid -> updateTile grid index ((getTile grid index) { mine = True })) grid mines
 
+getNeighbors :: Grid -> (Int,Int) -> [Tile]
+getNeighbors grid (x,y) = map (getTile grid) neighbors
+  where offsets = filter (/=(0,0)) [(x,y) | x <- [-1..1], y <- [-1..1]]
+        neighbors = filter checkValid $ map (\(a,b) -> (x+a,y+b)) offsets
+        checkValid (a,b) = a >= 0 && a < fst gameSize && b >= 0 && b < snd gameSize
+
+neighboringMines :: Grid -> (Int,Int) -> Int
+neighboringMines grid pos = length . filter mine $ getNeighbors grid pos
+
 squareSolid :: Float -> Picture
 squareSolid x = rectangleSolid x x
 

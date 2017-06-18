@@ -14,6 +14,13 @@ input (EventKey (MouseButton LeftButton) Down _ pos) ms@(Game grid _ _ _)
   where tile = getTile grid index
         clicked = decodeClick ms pos
         index = fromJust clicked
+input (EventKey (MouseButton RightButton) Down _ pos) ms@(Game grid _ _ _)
+  | isJust clicked = ms { grid = updateTile grid index (tile { flag = newFlag }) }
+  | otherwise = ms
+  where tile = getTile grid index
+        clicked = decodeClick ms pos
+        index = fromJust clicked
+        newFlag = if flag tile then False else True
 input (EventKey (Char 'r') Down _ _) ms = placeMines mines $ resetGame ms
 input (EventResize (w,h)) ms = ms { size = (toNum w, toNum h) }
 input _ ms = ms
