@@ -11,7 +11,8 @@ cabal-version:       >=1.10
 
 executable minesweeper
   main-is:             Main.hs
-  other-modules:       Model,
+  other-modules:       Config,
+                       Model,
                        Render,
                        Update,
                        Util
