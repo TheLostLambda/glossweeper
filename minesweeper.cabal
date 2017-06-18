@@ -17,6 +17,7 @@ executable minesweeper
                        Update,
                        Util
   build-depends:       base >=4.9 && <4.10,
+                       random,
                        gloss
   hs-source-dirs:      src
   default-language:    Haskell2010

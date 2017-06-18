@@ -1,11 +1,12 @@
 module Model where
 
--- Write a custom show instance for Minesweeper
--- Try some form of pretty printing the Grid
+import System.Random
+
 data Minesweeper = Game { grid :: Grid
                         , size :: Window
+                        , rng :: StdGen
                         , state :: Int
-                        } deriving(Eq, Show, Read)
+                        } deriving(Show, Read)
 
 data Tile = Tile { revealed :: Bool
                  , mine :: Bool
@@ -18,7 +19,11 @@ type Size = (Int, Int)
 
 type Window = (Float, Float)
 
-initGame :: Size -> Size -> Minesweeper
-initGame (wx,wy) (r,c) = Game (replicate r $ replicate c $ Tile False False False)
-                              (fromIntegral wx, fromIntegral wy)
-                              0
+initGame :: Size -> Size -> StdGen -> Minesweeper
+initGame (wx,wy) (r,c) rng = Game (replicate r $ replicate c $ Tile False False False)
+                                  (fromIntegral wx, fromIntegral wy)
+                                  rng
+                                  0
+
+resetGame :: Minesweeper -> Minesweeper
+resetGame ms@(Game grid _ _ _) = ms { grid = map (map (\x -> Tile False False False)) grid }

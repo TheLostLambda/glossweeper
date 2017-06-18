@@ -6,7 +6,7 @@ import Util
 import Config
 
 render :: Minesweeper -> Picture
-render (Game grid win@(wx,wy) 0) = Pictures $ map (uncurry . drawTile $ tileSize win gs) positionGrid
+render (Game grid win@(wx,wy) _ 0) = Pictures $ map (uncurry . drawTile $ tileSize win gs) positionGrid
   where gs@(r,c) = gridSize grid
         positionGrid = zip (tilePositions win gs) (concat grid)
 

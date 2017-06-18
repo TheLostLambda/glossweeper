@@ -28,3 +28,6 @@ mineColor = dark $ dim red
 
 flagColor :: Color
 flagColor = dark $ dim green
+
+mines :: Int
+mines = 20

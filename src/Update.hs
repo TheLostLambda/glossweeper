@@ -5,22 +5,24 @@ import Data.Maybe
 import Data.List
 import Model
 import Util
+import Config
 
 input :: Event -> Minesweeper -> Minesweeper
-input (EventKey (MouseButton LeftButton) Down _ pos) ms@(Game grid _ _)
+input (EventKey (MouseButton LeftButton) Down _ pos) ms@(Game grid _ _ _)
   | isJust clicked = ms { grid = updateTile grid index (tile { revealed = True }) }
   | otherwise = ms
-  where tile = (grid !! r) !! c
+  where tile = getTile grid index
         clicked = decodeClick ms pos
-        index@(r,c) = fromJust clicked
-
+        index = fromJust clicked
+input (EventKey (Char 'r') Down _ _) ms = placeMines mines $ resetGame ms
+input (EventResize (w,h)) ms = ms { size = (toNum w, toNum h) }
 input _ ms = ms
 
 step :: Float -> Minesweeper -> Minesweeper
 step _ ms = ms
 
 decodeClick :: Minesweeper -> (Float, Float) -> Maybe (Int,Int)
-decodeClick (Game grid win _) (mx,my)
+decodeClick (Game grid win _ _) (mx,my)
   | null row || null col = Nothing
   | otherwise = Just (head row, head col)
     where positions = tilePositions win (gridSize grid)
