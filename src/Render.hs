@@ -22,11 +22,10 @@ drawTile ms@(Game grid (wx,wy) _ _) index@(r,c) = Translate x y $ Pictures rende
         mines = neighboringMines ms index
         s = size / 150
         (tx,ty) = (-37.5 * s, -50 * s)
-        numDisplay = revealed tile && (not $ mine tile) && mines > 0
+        numDisplay = revealed tile && not (mine tile) && mines > 0
         renderLst = [ Color (tileToColor tile) $ squareSolid size
-                    , if numDisplay
-                        then (Translate tx ty $ Scale s s $ text (show mines))
-                        else Blank]
+                    , if numDisplay then Translate tx ty $ Scale s s $ text (show mines)
+                                    else Blank]
         size = tileSize ms
 
 tileToColor :: Tile -> Color

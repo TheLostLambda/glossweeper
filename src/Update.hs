@@ -32,10 +32,10 @@ input _ ms = ms
 
 step :: Float -> Minesweeper -> Minesweeper
 step _ ms@(Game grid _ _ 0)
-  | length remaining > mines || length unflagged > 0 = ms
+  | length remaining > mines || not (null unflagged) = ms
   | otherwise = ms { state = 2 }
   where remaining = filter (not . revealed) (concat grid)
-        unflagged = filter (\x -> mine x && (not $ flag x)) (concat grid)
+        unflagged = filter (\x -> mine x && not (flag x)) (concat grid)
 step _ ms = ms
 
 decodeClick :: Minesweeper -> (Float, Float) -> Maybe (Int,Int)
