@@ -1,4 +1,4 @@
-name:                minesweeper
+name:                glossweeper
 version:             0.1.0.0
 synopsis:            A Minesweeper clone written in Haskell and Gloss
 license:             PublicDomain
@@ -9,7 +9,7 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 
-executable minesweeper
+executable glossweeper
   main-is:             Main.hs
   other-modules:       Config,
                        Model,

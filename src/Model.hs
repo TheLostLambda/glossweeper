@@ -26,4 +26,4 @@ initGame (wx,wy) (r,c) rng = Game (replicate r $ replicate c $ Tile False False 
                                   0
 
 resetGame :: Minesweeper -> Minesweeper
-resetGame ms@(Game grid _ _ _) = ms { grid = map (map (\x -> Tile False False False)) grid }
+resetGame ms@(Game grid _ _ _) = ms { grid = map (map (\x -> Tile False False False)) grid, state = 0}

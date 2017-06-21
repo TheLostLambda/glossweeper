@@ -6,7 +6,7 @@ title :: String
 title = "Glossweeper"
 
 screenSize :: (Int,Int)
-screenSize = (600, 600)
+screenSize = (900, 900)
 
 gameSize :: (Int,Int)
 gameSize = (10,10)
@@ -29,5 +29,8 @@ mineColor = dark $ dim red
 flagColor :: Color
 flagColor = dark $ dim green
 
+overlayColor :: Color
+overlayColor = makeColor 0 0 0 0.7
+
 mines :: Int
-mines = 20
+mines = 15
