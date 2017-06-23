@@ -9,7 +9,7 @@ screenSize :: (Int,Int)
 screenSize = (900, 900)
 
 gameSize :: (Int,Int)
-gameSize = (10,10)
+gameSize = (15,15)
 
 background :: Color
 background = greyN 0.75
@@ -33,4 +33,4 @@ overlayColor :: Color
 overlayColor = makeColor 0 0 0 0.7
 
 mines :: Int
-mines = 15
+mines = 30
